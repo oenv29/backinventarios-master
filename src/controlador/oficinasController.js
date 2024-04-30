@@ -53,7 +53,7 @@ export const traerOficinaController = async (req, res) =>{
         if(dato){
             return res.status(200).json({
                 status: "sunset",
-                bloques: dato
+                oficina: dato
             })
         }else{
             return res.status(200).json({

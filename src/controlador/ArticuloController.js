@@ -1,4 +1,4 @@
-import {validarExisteArticulo,crearAsignacionModelo} from '../modelo/ArticuloModelo.js'
+import {validarExisteArticulo,crearAsignacionModelo,validarExisteArticuloAsigOfiBloque,validarExisteArticuloAsigBloque,validarExisteArticuloAsigOficina} from '../modelo/ArticuloModelo.js'
 
 
 export const obtenerOficinaPorBlo = async (req,res) =>{
@@ -7,14 +7,12 @@ export const obtenerOficinaPorBlo = async (req,res) =>{
         let id = req.params.id
 
         let articulo = await validarExisteArticulo(id)
-
-        if(articulo.length == 0){
-            // devolver respuesta
-            return res.status(200).json({
-                status: "success",
-                contar:articulo.length
-            }); 
-        }
+        // devolver respuesta
+        return res.status(200).json({
+            status: "success",
+            contar:articulo.length
+        }); 
+        
 
     }catch(error){
         return res.status(500).json({
@@ -69,4 +67,68 @@ export const crearAsignacioncontroller = async (req,res) =>{
 
         
     
+}
+
+
+export const obtenerAsigPorBloyOfi = async (req,res) =>{
+
+    try{
+        let id = req.params
+
+        let asig = await validarExisteArticuloAsigOfiBloque(id.idb,id.idf)
+        // devolver respuesta
+        return res.status(200).json({
+            status: "success",
+            asig
+        }); 
+
+    }catch(error){
+        return res.status(500).json({
+            status: "error",
+            message: 'Ocurrió un error, contacte al administrador de sistemas.' + error
+        });
+    }
+
+}
+
+export const obtenerAsigPorBlo = async (req,res) =>{
+
+    try{
+        let id = req.params
+
+        let asig = await validarExisteArticuloAsigBloque(id.idb)
+        // devolver respuesta
+        return res.status(200).json({
+            status: "success",
+            asig
+        }); 
+
+    }catch(error){
+        return res.status(500).json({
+            status: "error",
+            message: 'Ocurrió un error, contacte al administrador de sistemas.' + error
+        });
+    }
+
+}
+
+export const obtenerAsigPorOfi = async (req,res) =>{
+
+    try{
+        let id = req.params
+
+        let asig = await validarExisteArticuloAsigOficina(id.idf)
+        // devolver respuesta
+        return res.status(200).json({
+            status: "success",
+            asig
+        }); 
+
+    }catch(error){
+        return res.status(500).json({
+            status: "error",
+            message: 'Ocurrió un error, contacte al administrador de sistemas.' + error
+        });
+    }
+
 }

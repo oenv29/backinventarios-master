@@ -18,3 +18,32 @@ export const crearAsignacionModelo = async (id_bloque,id_oficina,id_articulo) =>
         return error;
     }
 }
+
+export const validarExisteArticuloAsigOfiBloque = async (id_bloque,id_oficina) =>{
+    try{
+        const [asig] = await conexion.query('SELECT * FROM asignararticulos WHERE estado = 1 and id_bloque = ? and id_oficina = ?',[id_bloque,id_oficina]);	
+        return asig;
+    }catch(error){
+        return error;
+    }
+}
+
+
+
+export const validarExisteArticuloAsigBloque = async (id_bloque) =>{
+    try{
+        const [asig] = await conexion.query('SELECT * FROM asignararticulos WHERE estado = 1 and id_bloque = ?',[id_bloque]);	
+        return asig;
+    }catch(error){
+        return error;
+    }
+}
+
+export const validarExisteArticuloAsigOficina = async (id_oficina) =>{
+    try{
+        const [asig] = await conexion.query('SELECT * FROM asignararticulos WHERE estado = 1 and id_oficina = ?',[id_oficina]);	
+        return asig;
+    }catch(error){
+        return error;
+    }
+}
